@@ -6,13 +6,12 @@ import Styles from '../assets/Styles';
 const styles = Styles;
 
 export default class SpeedoComponent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      points: props.currentValue,
-    };
-  }
-  
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     points: props.currentValue,
+  //   };
+  // }
   renderDial = opts => {
     let offset = opts.circumference * (1 - 100 / 200);
 
@@ -134,12 +133,8 @@ export default class SpeedoComponent extends Component {
   };
 
   render() {
-    const MAX_POINTS = 100;
-
     let opts = Object.assign({}, this.props);
-
     let { size, dialWidth } = opts;
-
     let cX = size / 2;
     let cY = 100;
     let radius = (size - 1 * dialWidth) / 2;
@@ -157,7 +152,6 @@ export default class SpeedoComponent extends Component {
         backgroundColor: '#fff',
         borderRadius: 16,
       }]}>
-
         <View style={{alignItems: 'center', paddingTop: 25}}>
           <Svg
             width={size}

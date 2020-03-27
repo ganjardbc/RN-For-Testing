@@ -6,17 +6,13 @@
  * @flow
  */
 
-import React, { Component, useEffect } from 'react';
+import React, { Component } from 'react';
 import {
-  SafeAreaView,
-  StyleSheet,
   ScrollView,
   View,
   Text,
   StatusBar,
   Image,
-  Button,
-  Alert
 } from 'react-native';
 
 import LineComponent from './components/Line';
@@ -34,14 +30,16 @@ class App extends Component {
     super();
     this.state = {
       pointRatio: 0,
-      pointSpeedo: 34,
-      pointUnique: 59
+      pointSpeedo: 0,
+      pointUnique: 0
     };
   }
 
   componentDidMount() {
     timer = setInterval(() => {
       this.changePointRatio()
+      // this.changePointSpeedo()
+      this.changePointUnique()
     }, 5000);
   }
 
@@ -49,17 +47,19 @@ class App extends Component {
     clearInterval(timer)
   }
 
-  // useEffect() {
-  //   const timer = setTimeout(() => {
-  //     this.changePointRatio();
-  //   }, 3000)
-  //   return () => clearTimeout(timer);
-  // }
-
   changePointRatio = () => {
     let value = Math.floor(Math.random() * 100) + 1;
-    console.log(value)
     this.setState({pointRatio: value})
+  }
+
+  changePointSpeedo = () => {
+    let value = Math.floor(Math.random() * 100) + 1;
+    this.setState({pointSpeedo: value})
+  }
+
+  changePointUnique = () => {
+    let value = Math.floor(Math.random() * 100) + 1;
+    this.setState({pointUnique: value})
   }
 
   render() {
@@ -171,7 +171,7 @@ class App extends Component {
               </Text>
             </View>
 
-            <View style={[{
+            {/* <View style={[{
               margin: '2.5%',
               backgroundColor: '#fff',
               borderRadius: 16,
@@ -186,7 +186,7 @@ class App extends Component {
               }}>
                 SPEEDO UNIQUE HITS
               </Text>
-            </View>
+            </View> */}
 
             <View style={[{
               margin: '2.5%',
