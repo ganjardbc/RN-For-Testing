@@ -6,7 +6,7 @@
  * @flow
  */
 
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -14,7 +14,9 @@ import {
   View,
   Text,
   StatusBar,
-  Image
+  Image,
+  Button,
+  Alert
 } from 'react-native';
 
 import LineComponent from './components/Line';
@@ -25,9 +27,48 @@ import SpeedoComponent from './components/Speedo';
 import Styles from './assets/Styles';
 
 const styles = Styles;
+let timer = null;
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      pointRatio: 0,
+      pointSpeedo: 34,
+      pointUnique: 59
+    };
+  }
+
+  componentDidMount() {
+    timer = setInterval(() => {
+      this.changePointRatio()
+    }, 5000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(timer)
+  }
+
+  // useEffect() {
+  //   const timer = setTimeout(() => {
+  //     this.changePointRatio();
+  //   }, 3000)
+  //   return () => clearTimeout(timer);
+  // }
+
+  changePointRatio = () => {
+    let value = Math.floor(Math.random() * 100) + 1;
+    console.log(value)
+    this.setState({pointRatio: value})
+  }
+
   render() {
+    let {
+      pointRatio,
+      pointSpeedo,
+      pointUnique
+    } = this.state;
+
     return (
       <>
         <StatusBar barStyle="light-content" />
@@ -35,6 +76,7 @@ class App extends Component {
           <ScrollView
             contentInsetAdjustmentBehavior="automatic"
             style={styles.scrollView}>
+
             <View style={[{
               margin: '2.5%',
               backgroundColor: '#fff',
@@ -99,7 +141,7 @@ class App extends Component {
                 </Text>
               </View>
 
-              <SpeedoComponent size={200} currentValue={87} needleSharp={true}/>
+              <SpeedoComponent size={200} currentValue={pointRatio} needleSharp={true}/>
 
               <Text style={{
                 color: '#333', 
@@ -117,7 +159,7 @@ class App extends Component {
               backgroundColor: '#fff',
               borderRadius: 16,
             }, styles.shadowComponent]}>
-              <GaugeComponent currentValue={58}/>
+              <GaugeComponent currentValue={pointUnique}/>
               <Text style={{
                 color: '#333', 
                 fontWeight: 'bold', 
@@ -128,6 +170,24 @@ class App extends Component {
                 UNIQUE HITS
               </Text>
             </View>
+
+            <View style={[{
+              margin: '2.5%',
+              backgroundColor: '#fff',
+              borderRadius: 16,
+            }, styles.shadowComponent]}>
+              <SpeedoComponent size={200} currentValue={pointSpeedo} needleSharp={true}/>
+              <Text style={{
+                color: '#333', 
+                fontWeight: 'bold', 
+                fontSize: 18,
+                marginBottom: 20,
+                textAlign: 'center'
+              }}>
+                SPEEDO UNIQUE HITS
+              </Text>
+            </View>
+
             <View style={[{
               margin: '2.5%',
               backgroundColor: '#fff',
@@ -135,6 +195,7 @@ class App extends Component {
             }, styles.shadowComponent]}>
               <LineComponent/>
             </View>
+
             <View style={[{
               margin: '2.5%',
               backgroundColor: '#fff',
@@ -142,6 +203,7 @@ class App extends Component {
             }, styles.shadowComponent]}>
               <PieComponent/>
             </View>
+
             <View style={[{
               margin: '2.5%',
               backgroundColor: '#fff',

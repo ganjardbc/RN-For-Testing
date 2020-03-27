@@ -21,9 +21,9 @@ export default class GaugeComponent extends Component {
         borderRadius: 16,
       }]}>
 
-        <View style={{alignItems: 'center', paddingTop: 25}}>
+        <View style={{alignItems: 'center'}}>
           <CircularProgress
-            style={{top: 20}}
+            style={{top: 25}}
             size={200}
             width={15}
             fill={fill}

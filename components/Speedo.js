@@ -120,7 +120,9 @@ export default class SpeedoComponent extends Component {
         style={{
           position: 'absolute',
           top: opts.cX + 25,
-          left: (opts.size - 38) / 2,
+          width: '100%',
+          textAlign: 'center',
+          margin: 'auto',
           fontSize: 38,
           color: opts.textColor
         }}
@@ -133,7 +135,6 @@ export default class SpeedoComponent extends Component {
 
   render() {
     const MAX_POINTS = 100;
-    const fill = (this.state.points / MAX_POINTS) * 100;
 
     let opts = Object.assign({}, this.props);
 
